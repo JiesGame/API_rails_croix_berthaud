@@ -8,11 +8,12 @@ admin = User.create(
   is_admin: true
 )
 
-6.times do
+15.times do
   Article.create(
     title: Faker::Book.title,
     content: Faker::Lorem.paragraphs,
-    user_id: admin.id,
+    category: rand(6),
+    user_id: admin.id
   )
 end
 
