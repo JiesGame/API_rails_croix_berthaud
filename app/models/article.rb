@@ -6,5 +6,5 @@ class Article < ApplicationRecord
   validates :content, presence: true
   validates :category, presence: true
 
-  enum category:["News", "Maison de quartier", "Programme", "A l'affiche", "Activités enfants", "Activités adultes"]
+  enum category:["news", "maison_de_quartier", "programme", "a_l_affiche", "activites_enfants", "activites_adultes"]
 end

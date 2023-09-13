@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   put 'password/update', to: 'password#update'
 
   namespace :admin do
-    resources :users, :articles
+    resources :users
+    resources :articles, except: [:show]
+    get 'articles/:category', to: 'articles#index_admin'
   end
 end
