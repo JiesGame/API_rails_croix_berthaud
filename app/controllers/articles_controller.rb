@@ -5,9 +5,9 @@ class ArticlesController < ApplicationController
   # GET /articles
   def index
     if current_user
-      @articles = Article.where(private: false).or(current_user.articles.where(private: true))
+      @articles = Article.where(private: false).or(current_user.articles.where(private: true)).where(category: 0)
     else
-      @articles = Article.where(private: false)
+      @articles = Article.where(private: false).where(category: 0)
     end
     render json: @articles
   end
