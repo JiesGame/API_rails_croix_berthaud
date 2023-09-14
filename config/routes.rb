@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post 'password/forgot', to: 'password#forgot'
   put 'password/reset/:token', to: 'password#reset'
   put 'password/update', to: 'password#update'
+  post 'users/destroy_with_password', to: "users#destroy_with_password"
 
   namespace :admin do
     resources :users
