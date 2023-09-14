@@ -65,13 +65,14 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  def destroy
-    @updatedUserID = params[:id].to_i
-    if @updatedUserID == get_user_from_token.id
-      @user.destroy
+  # DELETE /users/destroy_with_password
+  def destroy_with_password
+    if current_user.valid_password?(params[:data][:current_password])
+      current_user.destroy
+      sign_out(current_user)
+      render json: {error: "Le compte a été supprimé !"}, status: :ok
     else
-      render json: { error: "Vous ne pouvez pas supprimer un autre profil que le votre." }, status: :unprocessable_entity
+      render json: { error: "Le mot de passe est incorrect." }, status: :unprocessable_entity
     end
   end
 
