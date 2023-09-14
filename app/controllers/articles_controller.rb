@@ -20,18 +20,22 @@ class ArticlesController < ApplicationController
 
   # POST /articles
   def create
-    @article = Article.new(title: article_params[:title], content: article_params[:content], user_id: current_user.id, private: article_params[:private])
+    @article = Article.new(article_params.merge(user_id: current_user.id))
+    if current_user.is_admin
       if @article.save
         render json: @article, status: :created, location: @article
       else
         render json: @article.errors, status: :unprocessable_entity
       end
+    else
+      render json: { error: "Vous ne pouvez pas créer un article." }, status: :unprocessable_entity
+    end
   end
 
   # PATCH/PUT /articles/1
   def update
     if @article.user.id == current_user.id
-      if @article.update(title: article_params[:title], content: article_params[:content], user_id: @article.user.id)
+      if @article.update(article_params.merge(user_id: @article.user.id))
         render json: @article
       else
         render json: @article.errors, status: :unprocessable_entity
@@ -58,6 +62,6 @@ class ArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.require(:article).permit(:title, :content, :private)
+      params.require(:article).permit(:title, :content, :private, :category)
     end
 end
