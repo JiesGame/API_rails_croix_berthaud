@@ -34,7 +34,7 @@ class ArticlesController < ApplicationController
 
   # PATCH/PUT /articles/1
   def update
-    if @article.user.id == current_user.id
+    if current_user.is_admin
       if @article.update(article_params.merge(user_id: @article.user.id))
         render json: @article
       else
@@ -47,7 +47,7 @@ class ArticlesController < ApplicationController
 
   # DELETE /articles/1
   def destroy
-    if @article.user.id == current_user.id
+    if current_user.is_admin 
       @article.destroy
     else
       render json: { error: "Vous ne pouvez pas supprimer cet article." }, status: :unprocessable_entity
