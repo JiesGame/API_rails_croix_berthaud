@@ -18,5 +18,6 @@ Rails.application.routes.draw do
     resources :users
     resources :articles, except: [:show]
     get 'articles/:category', to: 'articles#index_admin'
+    delete 'user_destroy_by_admin/:id', to: 'users#user_destroy_by_admin'
   end
 end

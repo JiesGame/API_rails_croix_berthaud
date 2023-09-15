@@ -12,7 +12,6 @@ class ArticlesController < ApplicationController
     render json: @articles
   end
   
-
   # GET /articles/1
   def show
     render json: @article, include: :comments
