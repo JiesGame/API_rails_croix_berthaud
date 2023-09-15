@@ -3,3 +3,13 @@ require_relative "application"
 
 # Initialize the Rails application.
 Rails.application.initialize!
+
+ActionMailer::Base.smtp_settings = {
+  :user_name => 'apikey',
+  :password => ENV['SENDGRID_PWD'],
+  :domain => 'https://maison-quartier-croix-berthaud.vercel.app',
+  :address => 'smtp.sendgrid.net',
+  :port => 587,
+  :authentication => :plain,
+  :enable_starttls_auto => true
+  }
