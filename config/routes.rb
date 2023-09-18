@@ -6,7 +6,7 @@ Rails.application.routes.draw do
              }
   get '/member-data', to: 'members#show'
   resources :articles do
-    resources :comments
+    resources :comments, :rating
   end
   resources :users
   post 'password/forgot', to: 'password#forgot'
