@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[ index ]
 
   def index
     @article = Article.find(params[:article_id])
@@ -35,7 +35,7 @@ class CommentsController < ApplicationController
   def destroy
     @article = Article.find(params[:article_id])
     @comment = @article.comments.find(params[:id])
-    if @comment.user.id == current_user.id
+    if current_user.is_admin
       @comment.destroy
     else
       render json: { error: "Vous ne pouvez pas supprimer ce commentaire." }, status: :unprocessable_entity
