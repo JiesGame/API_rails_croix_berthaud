@@ -31,7 +31,6 @@ class CheckoutController < ApplicationController
     redirect_to url_react, allow_other_host: true
   end
 
-  # A changer si besoin
   def cancel
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
