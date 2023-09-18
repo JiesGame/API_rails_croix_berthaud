@@ -14,6 +14,12 @@ Rails.application.routes.draw do
   put 'password/update', to: 'password#update'
   post 'users/destroy_with_password', to: "users#destroy_with_password"
 
+  scope '/checkout' do
+    post 'create', to: 'checkout#create', as: 'checkout_create'
+    get 'success', to: 'checkout#success', as: 'checkout_success'
+    get 'cancel', to: 'checkout#cancel', as: 'checkout_cancel'
+  end
+
   namespace :admin do
     resources :users
     resources :articles, except: [:show]
