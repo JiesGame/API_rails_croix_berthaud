@@ -25,15 +25,16 @@ class CheckoutController < ApplicationController
 
   def success
     base_url = ENV["BASE_URL"]
-    url_react = "#{base_url}/thank_you"
+    url_success = "#{base_url}/thank_you"
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
-    redirect_to url_react, allow_other_host: true
+    redirect_to url_success, allow_other_host: true
   end
 
   def cancel
-    @session = Stripe::Checkout::Session.retrieve(params[:session_id])
-    @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
+    base_url = ENV["BASE_URL"]
+    url_cancel = "#{base_url}"
+    redirect_to url_cancel, allow_other_host: true
   end
 
 end

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'family_member_activities/new'
+  resources :family_members
+  resources :activities
   devise_for :users,
              controllers: {
                sessions: 'users/sessions',
@@ -6,7 +9,7 @@ Rails.application.routes.draw do
              }
   get '/member-data', to: 'members#show'
   resources :articles do
-    resources :comments
+    resources :comments, :rating
   end
   resources :users
   post 'password/forgot', to: 'password#forgot'
