@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'family_member_activities/new'
+  resources :family_members
+  resources :activities
   devise_for :users,
              controllers: {
                sessions: 'users/sessions',

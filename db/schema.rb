@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_18_184023) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_19_073142) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_18_184023) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "activities", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.integer "period"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -71,6 +79,31 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_18_184023) do
     t.datetime "updated_at", null: false
     t.index ["article_id"], name: "index_comments_on_article_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "family_member_activities", force: :cascade do |t|
+    t.bigint "family_member_id", null: false
+    t.bigint "activity_id", null: false
+    t.boolean "validation", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_family_member_activities_on_activity_id"
+    t.index ["family_member_id"], name: "index_family_member_activities_on_family_member_id"
+  end
+
+  create_table "family_members", force: :cascade do |t|
+    t.string "firstname"
+    t.string "lastname"
+    t.date "birthdate"
+    t.string "legaltutorfirstname"
+    t.string "legaltutorlastname"
+    t.string "phonenumber"
+    t.string "homephonenumber"
+    t.string "adresse"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_family_members_on_user_id"
   end
 
   create_table "jwt_denylist", force: :cascade do |t|
@@ -112,6 +145,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_18_184023) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "articles"
   add_foreign_key "comments", "users"
+  add_foreign_key "family_member_activities", "activities"
+  add_foreign_key "family_member_activities", "family_members"
+  add_foreign_key "family_members", "users"
   add_foreign_key "ratings", "articles"
   add_foreign_key "ratings", "users"
 end
