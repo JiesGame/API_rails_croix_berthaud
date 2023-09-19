@@ -1,6 +1,7 @@
 Article.destroy_all
 User.destroy_all
 Comment.destroy_all
+Activity.destroy_all
 
 admin = User.create(
   email: ENV["ADMIN_EMAIL"],

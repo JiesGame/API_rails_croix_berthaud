@@ -10,13 +10,20 @@ class ActivitiesController < ApplicationController
 
   # GET /activities/1
   def show
-    render json: @activity
+    if current_user.is_admin
+      render json: @activity, include: :family_members
+    else
+      render json: { error: "Vous n'êtes pas administrateur."}, status: :unauthorized
+    end
   end
 
   # POST /activities
   def create
     @activity = Activity.new(activity_params)
 
+    if !current_user.is_admin
+      render json: { error: "Vous n'êtes pas administrateur."}, status: :unauthorized
+    end
     if @activity.save
       render json: @activity, status: :created, location: @activity
     else
@@ -26,6 +33,9 @@ class ActivitiesController < ApplicationController
 
   # PATCH/PUT /activities/1
   def update
+    if !current_user.is_admin
+      render json: { error: "Vous n'êtes pas administrateur."}, status: :unauthorized
+    end
     if @activity.update(activity_params)
       render json: @activity
     else
