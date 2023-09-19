@@ -9,6 +9,7 @@ class User < ApplicationRecord
          
   has_many :articles
   has_many :comments, dependent: :destroy
+  has_many :family_members, dependent: :destroy
   validates :email, presence: true
 
   def generate_password_token!
