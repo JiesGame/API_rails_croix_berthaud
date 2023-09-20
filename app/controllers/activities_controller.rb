@@ -37,7 +37,7 @@ class ActivitiesController < ApplicationController
       render json: { error: "Vous n'êtes pas administrateur."}, status: :unauthorized
     end
     if @activity.update(activity_params)
-      render json: @activity
+      render json: @activity, status: :ok
     else
       render json: @activity.errors, status: :unprocessable_entity
     end
@@ -56,6 +56,6 @@ class ActivitiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def activity_params
-      params.require(:activity).permit(:id, :name, :price, :period)
+      params.require(:activity).permit(:name, :price, :period)
     end
 end
