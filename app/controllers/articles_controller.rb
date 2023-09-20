@@ -17,6 +17,11 @@ class ArticlesController < ApplicationController
     @articles = Article.where(category: category)
     render json: @articles
   end
+
+  def index_all_categories
+    @articles = Article.all
+    render json: @articles
+  end
   
   # GET /articles/1
   def show

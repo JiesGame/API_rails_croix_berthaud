@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   put 'password/update', to: 'password#update'
   post 'users/destroy_with_password', to: "users#destroy_with_password"
   get 'articles/category/:category', to: 'articles#index_category'
+  get 'articles_all', to: 'articles#index_all_categories'
 
   scope '/checkout' do
     post 'create', to: 'checkout#create', as: 'checkout_create'
