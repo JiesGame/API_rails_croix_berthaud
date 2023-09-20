@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   put 'password/reset/:token', to: 'password#reset'
   put 'password/update', to: 'password#update'
   post 'users/destroy_with_password', to: "users#destroy_with_password"
+  get 'articles/category/:category', to: 'articles#index_category'
 
   scope '/checkout' do
     post 'create', to: 'checkout#create', as: 'checkout_create'
@@ -26,7 +27,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users
     resources :articles, except: [:show]
-    get 'articles/:category', to: 'articles#index_admin'
     delete 'user_destroy_by_admin/:id', to: 'users#user_destroy_by_admin'
   end
 end
