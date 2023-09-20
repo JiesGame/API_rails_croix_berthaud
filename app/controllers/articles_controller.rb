@@ -11,6 +11,12 @@ class ArticlesController < ApplicationController
     end
     render json: @articles
   end
+
+  def index_category
+    category = params[:category]
+    @articles = Article.where(category: category)
+    render json: @articles
+  end
   
   # GET /articles/1
   def show
