@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :family_members, dependent: :destroy
   has_many :ratings, dependent: :destroy
+  has_many :family_member_activities, through: :family_members
+  has_many :activities, through: :family_member_activities
   validates :email, presence: true
 
   def generate_password_token!

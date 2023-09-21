@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     if current_user&.is_admin || current_user&.id == @user.id
-      render json: @user, include: :ratings
+      render json: @user, include: [:ratings, :family_members => {:include => [:family_member_activities, :activities]}]
     else
       render json: { error: "Action réservée aux administrateurs et à l'utilisateur du compte." }, status: :unprocessable_entity
     end
