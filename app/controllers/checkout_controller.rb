@@ -24,10 +24,10 @@ class CheckoutController < ApplicationController
   end
 
   def success
-    base_url = ENV["BASE_URL"]
-    url_success = "#{base_url}/thank_you"
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
+    base_url = ENV["BASE_URL"]
+    url_success = "#{base_url}/thank_you"
     redirect_to url_success, allow_other_host: true
   end
 
