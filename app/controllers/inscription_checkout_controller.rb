@@ -1,5 +1,4 @@
 class InscriptionCheckoutController < ApplicationController
-  skip_forgery_protection
   def create
     @member = params[:member]
     @activities = params[:checkedActivities]
