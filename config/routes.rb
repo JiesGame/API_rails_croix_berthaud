@@ -1,15 +1,14 @@
 Rails.application.routes.draw do
   
-  resources :family_members
-  resources :activities
-  resources :users
-
   devise_for :users,
              controllers: {
                sessions: 'users/sessions',
                registrations: 'users/registrations'
              }
 
+  resources :family_members
+  resources :activities
+  resources :users             
   resources :articles do
     resources :comments, :rating
   end
