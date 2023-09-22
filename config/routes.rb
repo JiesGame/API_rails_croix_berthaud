@@ -1,26 +1,23 @@
 Rails.application.routes.draw do
-  
+  get 'family_member_activities/new'
+  resources :family_members
+  resources :activities
   devise_for :users,
              controllers: {
                sessions: 'users/sessions',
                registrations: 'users/registrations'
              }
-
-  resources :family_members
-  resources :activities
-  resources :users             
+  get '/member-data', to: 'members#show'
   resources :articles do
     resources :comments, :rating
   end
-
-  get '/member-data', to: 'members#show'
-  get 'family_member_activities/new'
-  get 'articles/category/:category', to: 'articles#index_category'
-  get 'articles_all', to: 'articles#index_all_categories'
+  resources :users
   post 'password/forgot', to: 'password#forgot'
-  post 'users/destroy_with_password', to: "users#destroy_with_password"
   put 'password/reset/:token', to: 'password#reset'
   put 'password/update', to: 'password#update'
+  post 'users/destroy_with_password', to: "users#destroy_with_password"
+  get 'articles/category/:category', to: 'articles#index_category'
+  get 'articles_all', to: 'articles#index_all_categories'
 
   scope '/checkout' do
     post 'create', to: 'checkout#create', as: 'checkout_create'
