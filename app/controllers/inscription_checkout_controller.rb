@@ -1,4 +1,5 @@
 class InscriptionCheckoutController < ApplicationController
+  skip_forgery_protection
   def create
     @member = params[:member]
     @activities = params[:checkedActivities]
@@ -34,6 +35,8 @@ class InscriptionCheckoutController < ApplicationController
     @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
     @member = session[:member]
     @checkedActivities = session[:checkedActivities]
+    puts @member
+    puts '***************'
     session.delete(:member)
     session.delete(:checkedActivities)
     base_url = ENV["BASE_URL"]
