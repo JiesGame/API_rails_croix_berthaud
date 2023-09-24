@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def index
     if current_user&.is_admin
       @users = User.all
-      render json: @users
+      render json: @users, include: [:ratings, :family_members => {:include => [:family_member_activities, :activities]}]
     else
       render json: { error: "Action réservée aux administrateurs." }, status: :unprocessable_entity
     end

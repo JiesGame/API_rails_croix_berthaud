@@ -54,13 +54,11 @@ end
       adresse: Faker::Address.street_address,
       user_id: user.id
     )
-    if rand(2) == 0
-      activity = Activity.all.sample
-      FamilyMemberActivity.create(
-        family_member: family_member,
-        activity: activity,
-        validation: true
-      )
-    end
+    activity = Activity.all.sample
+    FamilyMemberActivity.create(
+      family_member: family_member,
+      activity: activity,
+      validation: true
+    )
   end
 end
