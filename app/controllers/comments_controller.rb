@@ -42,10 +42,6 @@ class CommentsController < ApplicationController
     end
   end
 
-  def options
-    head :ok
-  end
-
   private
 
   def comment_params

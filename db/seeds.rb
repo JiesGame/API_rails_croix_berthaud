@@ -9,6 +9,13 @@ admin = User.create(
   is_admin: true
 )
 
+articles = [
+  {title:"Qui somme-nous ?", content:"Une association déclarée et sans but lucratif ouverte à toutes et tous. Indépendante des mouvements politiques,religieux, syndicats et intérêts économiques. Elle est animée par son conseil d’administration et plus de 30 bénévoles, qui prennent en charge les activités ainsi que le fonctionnement de l’association. Des intervenants rémunérés encadrent certaines activités.", category:"maison_de_quartier", user_id:admin.id},
+  {title:"A qui s'adresse l'association ?", content:"L’association est ouverte à toute personne intéressée par son projet, ses actions, ses activités. La zone géographique de recrutement est d’abord la Croix Berthaud et Grange-Roux ainsi que les quartiers environnants. Des habitants de l’ensemble de Saint-Chamond et des communes voisines nous rejoignent.", category:"maison_de_quartier", user_id:admin.id},
+  {title:"Nos actions et activités ?", content:"Animation du quartier, en offrant à ses habitants un lieu de rencontre et de convivialité. Contribution à l'amélioration du cadre de vie. Actions culturelles, socio-éducatives, de détente et de loisirs en direction des enfants, jeunes et adultes.", category:"maison_de_quartier", user_id:admin.id},
+  {title:"Comment participer à nos activités ?", content:"Une association déclarée et sans but lucratif ouverte à toutes et tous. Indépendante des mouvements politiques,religieux, syndicats et intérêts économiques. Elle est animée par son conseil d’administration et plus de 30 bénévoles, qui prennent en charge les activités ainsi que le fonctionnement de l’association. Des intervenants rémunérés encadrent certaines activités.", category:"maison_de_quartier", user_id:admin.id},
+
+]
 25.times do
   Article.create(
     title: Faker::Book.title,
