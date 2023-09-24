@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :family_member_activities
   resources :articles do
     resources :comments, :rating
+    match '*path', to: 'comments#options', via: :options
   end
   resources :users
   post 'password/forgot', to: 'password#forgot'
