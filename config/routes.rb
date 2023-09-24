@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'family_member_activities/new'
-  resources :family_members
   resources :activities
   devise_for :users,
              controllers: {
@@ -8,6 +6,8 @@ Rails.application.routes.draw do
                registrations: 'users/registrations'
              }
   get '/member-data', to: 'members#show'
+  resources :family_members
+  resources :family_member_activities
   resources :articles do
     resources :comments, :rating
   end
@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users
     resources :articles, except: [:show]
+    get 'users_with_unvalidated_activities', to: 'users#users_with_unvalidated_activities'
     delete 'user_destroy_by_admin/:id', to: 'users#user_destroy_by_admin'
   end
 end
