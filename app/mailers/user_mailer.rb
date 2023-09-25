@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: "from@example.com"
+  default from: ENV["MAIL_DEFAULT"]
 
   def password_reset(user, reset_password_url)
       @user = user
